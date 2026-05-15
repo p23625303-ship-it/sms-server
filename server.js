@@ -27,7 +27,7 @@ app.post("/send-sms", async (req, res) => {
     await messageService.send({
       to: formattedPhone,
       from: process.env.SEND_PHONE,
-      text: `[동백담] 대기번호 ${number}번 고객님, 입장해주세요.`
+      text: `[동백담]\n대기번호 ${number}번 고객님, 지금 입장해주세요.\n10분 내 미입장 시 자동 취소됩니다.`
     });
 
     res.json({ success: true });
@@ -41,4 +41,4 @@ const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`서버 실행됨 ${PORT}`);
-});
+}); 
