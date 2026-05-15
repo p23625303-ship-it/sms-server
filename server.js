@@ -19,19 +19,21 @@ app.get("/", (req, res) => {
 });
 
 app.post("/send-sms", async (req, res) => {
-  const { to, text } = req.body;
+  const { phone, number } = req.body;
+
+  const formattedPhone = String(phone).replace(/[^0-9]/g, "");
 
   try {
-    const result = await messageService.send({
-      to: to,
+    await messageService.send({
+      to: formattedPhone,
       from: process.env.SEND_PHONE,
-      text: text,
+      text: `[동백담] 대기번호 ${number}번 고객님, 입장해주세요.`
     });
 
-    res.json({ success: true, result });
+    res.json({ success: true });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: err.message });
+    console.error("문자 발송 실패:", err);
+    res.json({ success: false, error: err.message });
   }
 });
 
