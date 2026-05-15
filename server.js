@@ -34,9 +34,7 @@ app.post("/send-sms", async (req, res) => {
 
   let formattedPhone = String(phone).replace(/[\s-]/g, "");
 
-  if (formattedPhone.startsWith("010")) {
-    formattedPhone = "+82" + formattedPhone.substring(1);
-  }
+ formattedPhone = formattedPhone.replace(/[^0-9]/g, "");
 
   try {
     await messageService.send({
