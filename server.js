@@ -27,7 +27,7 @@ app.post("/send-sms", async (req, res) => {
     await messageService.send({
       to: formattedPhone,
       from: process.env.SEND_PHONE,
-      text: `[동백담]\n\n대기번호 ${number}번 고객님\n 지금 입장해주세요.\n\n10분 내 미입장 시 자동 취소됩니다.`
+      text: `[동백담]\n\n${number}번 고객님, 지금 입장해 주세요.\n\n5분 내 미입장 시 자동 취소됩니다.`
     });
 
     res.json({ success: true });
